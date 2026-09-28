@@ -6,14 +6,16 @@ if (!uri) {
     throw new Error("MONGODB_URI n'est pas configurée.");
 }
 
-let client;
-let clientPromise;
+const client = new MongoClient(uri, {
+    serverSelectionTimeoutMS: 10000,
+    connectTimeoutMS: 10000,
+});
 
-if (!global._mongoClientPromise) {
-    client = new MongoClient(uri);
-    global._mongoClientPromise = client.connect();
+let clientPromise = global._mongoClientPromise;
+
+if (!clientPromise) {
+    clientPromise = client.connect();
+    global._mongoClientPromise = clientPromise;
 }
-
-clientPromise = global._mongoClientPromise;
 
 export default clientPromise;
