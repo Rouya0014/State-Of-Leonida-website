@@ -56,13 +56,14 @@
   var BAD = ["error", "failed", "denied", "cancelled", "canceled", "access_denied"];
 
   if (GOOD.indexOf(raw) !== -1 || BAD.indexOf(raw) !== -1) {
-    ["auth", "login", "status", "error"].forEach(function (k) { params.delete(k); });
+    var who = (params.get("name") || "").slice(0, 40);
+    ["auth", "login", "status", "error", "name"].forEach(function (k) { params.delete(k); });
     var qs = params.toString();
     history.replaceState(null, "", window.location.pathname + (qs ? "?" + qs : "") + window.location.hash);
 
     if (GOOD.indexOf(raw) !== -1) {
       showPopup(true, "Authentification réussie", [
-        "Tu es bien connecté avec Discord.",
+        who ? "Bienvenue " + who + "." : "Tu es bien connecté avec Discord.",
         "Le bot va t'envoyer un message privé : vérifie tes messages Discord."
       ]);
     } else {
