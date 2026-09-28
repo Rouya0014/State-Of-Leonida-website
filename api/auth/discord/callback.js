@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import clientPromise from "../../../lib/mongodb.js";
+import clientPromise from "../../lib/mongodb.js";
 
 export default async function handler(req, res) {
     const { code, error } = req.query;
