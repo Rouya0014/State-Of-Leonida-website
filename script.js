@@ -1,6 +1,6 @@
 (function () {
   // Adresse qui lance la connexion Discord (ta route existante)
-  var LOGIN_URL = "/api/auth/discord";
+  var LOGIN_URL = "/api/auth/discord/login";
 
   var modal = document.getElementById("modal");
   var body = document.getElementById("modal-body");
