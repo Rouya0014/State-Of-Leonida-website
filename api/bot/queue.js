@@ -1,18 +1,44 @@
 import clientPromise from "../lib/mongodb.js";
 
+function isAuthorized(req) {
+    const auth = req.headers.authorization;
+
+    return (
+        auth &&
+        auth === `Bearer ${process.env.BOT_API_KEY}`
+    );
+}
+
 export default async function handler(req, res) {
+    if (!isAuthorized(req)) {
+        return res.status(401).json({
+            error: "Non autorisé.",
+        });
+    }
+
     try {
         const client = await clientPromise;
         const db = client.db();
-
         const collection = db.collection("oauth_queue");
+
+        if (req.method === "GET") {
+            const users = await collection
+                .find({ status: "pending" })
+                .sort({ createdAt: 1 })
+                .limit(10)
+                .toArray();
+
+            return res.status(200).json({
+                queue: users,
+            });
+        }
 
         if (req.method === "POST") {
             const { userId } = req.body || {};
 
             if (!userId) {
                 return res.status(400).json({
-                    error: "userId manquant",
+                    error: "userId manquant.",
                 });
             }
 
@@ -33,19 +59,32 @@ export default async function handler(req, res) {
             });
         }
 
-        if (req.method === "GET") {
-            const users = await collection
-                .find({ status: "pending" })
-                .sort({ createdAt: 1 })
-                .toArray();
+        if (req.method === "PATCH") {
+            const { userId, status } = req.body || {};
+
+            if (!userId || !status) {
+                return res.status(400).json({
+                    error: "userId ou status manquant.",
+                });
+            }
+
+            await collection.updateOne(
+                { userId },
+                {
+                    $set: {
+                        status,
+                        processedAt: new Date(),
+                    },
+                }
+            );
 
             return res.status(200).json({
-                queue: users,
+                success: true,
             });
         }
 
         return res.status(405).json({
-            error: "Méthode non autorisée",
+            error: "Méthode non autorisée.",
         });
 
     } catch (error) {
