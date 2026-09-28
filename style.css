@@ -46,3 +46,19 @@ body{overflow-x:clip}
 .panel p:last-child{margin:0}
 footer{padding:2.5rem 1.25rem 2.5rem;text-align:center;font-size:.9rem;text-shadow:0 1px 8px rgba(20,10,50,.9)}
 footer p{margin:.2rem 0}
+
+.modal{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:1.25rem;background:rgba(15,10,35,.72);backdrop-filter:blur(6px)}
+.modal[hidden]{display:none}
+.modal-box{position:relative;width:min(440px,100%);padding:2.2rem 1.75rem 1.75rem;text-align:center;background:rgba(32,24,68,.97);border:1px solid rgba(255,255,255,.2);border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:pop .25s ease-out both}
+@keyframes pop{from{transform:scale(.94);opacity:0}}
+.modal-x{position:absolute;top:.5rem;right:.6rem;width:42px;height:42px;border:0;border-radius:50%;background:transparent;color:#fff;font-size:2rem;line-height:1;cursor:pointer}
+.modal-x:hover{background:rgba(255,255,255,.14)}
+.modal .av{width:72px;height:72px;border-radius:50%;border:3px solid var(--sun);margin-bottom:.8rem}
+.modal .badge{display:inline-grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#2fa866;font-size:1.7rem;font-weight:700;margin-bottom:.7rem}
+.modal .badge.bad{background:#c72d5c}
+.modal h2{font-size:1.7rem;color:var(--sun);margin-bottom:.6rem}
+.modal p{margin:0 0 .6rem}
+.modal .status{min-height:3.4em;font-weight:600}
+.modal .actions{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1rem}
+.modal .btn{padding:.6em 1.3em;font-size:1rem}
+@media(prefers-reduced-motion:reduce){.modal-box{animation:none}}

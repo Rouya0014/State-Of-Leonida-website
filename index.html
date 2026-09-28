@@ -23,9 +23,8 @@
     <p>Bienvenue en Léonida. Installe-toi, le soleil est déjà levé.</p>
     <div class="cta">
       <a class="btn" href="https://discord.gg/ksW9D8e8GU" target="_blank" rel="noopener">Rejoindre le serveur</a>
-      <a class="btn ghost" id="appeal" href="#">Vous avez été banni ?</a>
+      <a class="btn ghost" id="appeal" href="/api/auth/discord">Vous avez été banni ?</a>
     </div>
-    <span id="note" role="status"></span>
   </div>
   <div class="emblem" role="img" aria-label="Logo de l'État de Léonida"><div class="rays"></div><div class="sky"><div class="in"></div></div><img class="fg" src="assets/logo-emblem.png" alt=""><div class="ring"></div></div>
 </header>
@@ -42,6 +41,13 @@
   <p>Serveur communautaire non officiel, sans lien avec Rockstar Games ni Take-Two.</p>
   <p>Illustration de fond : GTAGFX</p>
 </footer>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-x" id="modal-close" type="button" aria-label="Fermer">&times;</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
