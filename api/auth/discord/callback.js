@@ -52,17 +52,18 @@ export default async function handler(req, res) {
 
         // 3. Ajout dans la file du bot
         const queueResponse = await fetch(
-            "https://stateofleonida.vercel.app/api/bot/queue",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    userId: user.id,
-                }),
-            }
-        );
+    "https://stateofleonida.vercel.app/api/bot/queue",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${process.env.BOT_API_KEY}`,
+        },
+        body: JSON.stringify({
+            userId: user.id,
+        }),
+    }
+);
 
         if (!queueResponse.ok) {
             console.error("Erreur ajout à la queue :", await queueResponse.text());
