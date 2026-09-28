@@ -1,9 +1,19 @@
 export default async function handler(req, res) {
-    const { code } = req.query;
+    const { code, error } = req.query;
 
-    if (!code) {
-        return res.status(400).send("Code OAuth2 manquant.");
-    }
+    // Renvoie le visiteur sur la page d'accueil, où le pop-up s'affiche
+    const goHome = (status, name) => {
+        let url = `/?auth=${status}`;
+        if (name) url += `&name=${encodeURIComponent(name)}`;
+        res.setHeader("Cache-Control", "no-store");
+        res.statusCode = 302;
+        res.setHeader("Location", url);
+        res.end();
+    };
+
+    // Connexion annulée sur la page Discord
+    if (error) return goHome("cancelled");
+    if (!code) return goHome("error");
 
     try {
         // 1. Échange du code OAuth2 contre un token
@@ -15,70 +25,51 @@ export default async function handler(req, res) {
             redirect_uri: "https://stateofleonida.vercel.app/api/auth/discord/callback",
         });
 
-        const tokenResponse = await fetch(
-            "https://discord.com/api/oauth2/token",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/x-www-form-urlencoded",
-                },
-                body: params,
-            }
-        );
+        const tokenResponse = await fetch("https://discord.com/api/oauth2/token", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: params,
+        });
 
         const tokenData = await tokenResponse.json();
 
         if (!tokenResponse.ok) {
             console.error("Erreur OAuth2 :", tokenData);
-            return res.status(500).send("Erreur lors de la connexion à Discord.");
+            return goHome("error");
         }
 
         // 2. Récupération du compte Discord
-        const userResponse = await fetch(
-            "https://discord.com/api/users/@me",
-            {
-                headers: {
-                    Authorization: `Bearer ${tokenData.access_token}`,
-                },
-            }
-        );
+        const userResponse = await fetch("https://discord.com/api/users/@me", {
+            headers: { Authorization: `Bearer ${tokenData.access_token}` },
+        });
 
         const user = await userResponse.json();
 
         if (!userResponse.ok) {
             console.error("Erreur récupération utilisateur :", user);
-            return res.status(500).send("Impossible de récupérer votre compte Discord.");
+            return goHome("error");
         }
 
         // 3. Ajout dans la file du bot
-        const queueResponse = await fetch(
-    "https://stateofleonida.vercel.app/api/bot/queue",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.BOT_API_KEY}`,
-        },
-        body: JSON.stringify({
-            userId: user.id,
-        }),
-    }
-);
+        const queueResponse = await fetch("https://stateofleonida.vercel.app/api/bot/queue", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${process.env.BOT_API_KEY}`,
+            },
+            body: JSON.stringify({ userId: user.id }),
+        });
 
         if (!queueResponse.ok) {
             console.error("Erreur ajout à la queue :", await queueResponse.text());
-            return res.status(500).send("Impossible de contacter le système du bot.");
+            return goHome("error");
         }
 
-        // 4. Confirmation
-        res.status(200).send(`
-            <h1>Connexion Discord réussie !</h1>
-            <p>Bienvenue ${user.global_name || user.username}.</p>
-            <p>Le bot va maintenant vous contacter en message privé.</p>
-        `);
+        // 4. Confirmation : retour à l'accueil avec le pop-up
+        return goHome("success", user.global_name || user.username);
 
-    } catch (error) {
-        console.error("Erreur :", error);
-        res.status(500).send("Une erreur est survenue.");
+    } catch (err) {
+        console.error("Erreur :", err);
+        return goHome("error");
     }
 }
