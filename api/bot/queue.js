@@ -17,10 +17,47 @@ export default async function handler(req, res) {
 
         /*
          * GET
-         * Réservé au bot.
-         * Récupère les demandes en attente.
          */
         if (req.method === "GET") {
+
+            /*
+             * Consultation du résultat depuis le site
+             * GET /api/bot/queue?checkId=...
+             */
+            if (req.query.checkId) {
+                const { checkId } = req.query;
+
+                const result = await collection.findOne(
+                    { checkId },
+                    {
+                        projection: {
+                            _id: 0,
+                            checkId: 1,
+                            username: 1,
+                            status: 1,
+                            banned: 1,
+                        },
+                    }
+                );
+
+                if (!result) {
+                    return res.status(404).json({
+                        error: "Vérification introuvable.",
+                    });
+                }
+
+                return res.status(200).json({
+                    success: true,
+                    status: result.status,
+                    banned: result.banned,
+                    username: result.username,
+                });
+            }
+
+            /*
+             * Sinon : GET réservé au bot
+             * Récupère les demandes en attente.
+             */
             if (!isAuthorized(req)) {
                 return res.status(401).json({
                     error: "Non autorisé.",
@@ -41,11 +78,9 @@ export default async function handler(req, res) {
         /*
          * POST
          * Réservé au bot.
-         *
-         * Permet également au système existant
-         * de créer une demande si nécessaire.
          */
         if (req.method === "POST") {
+
             if (!isAuthorized(req)) {
                 return res.status(401).json({
                     error: "Non autorisé.",
@@ -83,10 +118,11 @@ export default async function handler(req, res) {
          * PATCH
          * Réservé au bot.
          *
-         * Le bot utilise cette route après avoir
-         * vérifié le bannissement.
+         * Le bot indique ici si l'utilisateur
+         * est banni ou non.
          */
         if (req.method === "PATCH") {
+
             if (!isAuthorized(req)) {
                 return res.status(401).json({
                     error: "Non autorisé.",
@@ -101,8 +137,7 @@ export default async function handler(req, res) {
 
             if (!userId || !status) {
                 return res.status(400).json({
-                    error:
-                        "userId ou status manquant.",
+                    error: "userId ou status manquant.",
                 });
             }
 
@@ -127,58 +162,12 @@ export default async function handler(req, res) {
             });
         }
 
-        /*
-         * GET ?checkId=...
-         *
-         * Utilisé par le site.
-         *
-         * IMPORTANT :
-         * aucune BOT_API_KEY n'est nécessaire ici.
-         *
-         * Le checkId est aléatoire et temporaire.
-         */
-        if (
-            req.method === "GET" &&
-            req.query.checkId
-        ) {
-            const { checkId } = req.query;
-
-            const result = await collection.findOne(
-                { checkId },
-                {
-                    projection: {
-                        _id: 0,
-                        checkId: 1,
-                        username: 1,
-                        status: 1,
-                        banned: 1,
-                    },
-                }
-            );
-
-            if (!result) {
-                return res.status(404).json({
-                    error: "Vérification introuvable.",
-                });
-            }
-
-            return res.status(200).json({
-                success: true,
-                status: result.status,
-                banned: result.banned,
-                username: result.username,
-            });
-        }
-
         return res.status(405).json({
             error: "Méthode non autorisée.",
         });
 
     } catch (error) {
-        console.error(
-            "MongoDB error :",
-            error
-        );
+        console.error("MongoDB error :", error);
 
         return res.status(500).json({
             error: "Erreur serveur.",
