@@ -1,54 +1,689 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="fr">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>État de Léonida – Discord GTA VI Online</title>
-<meta name="description" content="Bienvenue en Léonida. Rejoins le serveur Discord GTA VI Online.">
-<meta name="theme-color" content="#2a2350">
-<link rel="icon" href="assets/logo-nav.png">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Figtree:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#12101d" />
+  <meta
+    name="description"
+    content="Bienvenue en Leonida. Rejoins notre communauté Discord francophone GTA VI et GTA Online. Trouve ton crew et écris ta prochaine histoire."
+  />
+  <link rel="icon" type="image/png" href="images/logo-nav.png" />
+  <link rel="stylesheet" href="style.css" />
+  <title>État de Leonida — Ta prochaine histoire commence ici</title>
 </head>
+
 <body>
-<nav>
-  <a class="brand" href="#accueil"><img src="assets/logo-nav.png" alt=""><span>État de Léonida</span></a>
-  <a class="l" href="#apropos">À propos</a>
-  <a class="btn" href="https://discord.gg/ksW9D8e8GU" target="_blank" rel="noopener">Rejoindre</a>
-</nav>
 
-<header class="hero" id="accueil">
-  <div>
-    <h1>Discord GTA VI<span>Online</span></h1>
-    <p>Bienvenue en Léonida. Installe-toi, le soleil est déjà levé.</p>
-    <div class="cta">
-      <a class="btn" href="https://discord.gg/ksW9D8e8GU" target="_blank" rel="noopener">Rejoindre le serveur</a>
-      <a class="btn ghost" id="appeal" href="/api/auth/discord/login">Vous avez été banni ?</a>
-    </div>
+  <!-- Icônes : définies une fois ici, utilisées partout avec <use href="#i-nom"> -->
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+
+
+<symbol id="i-arrow-up-right" viewBox="0 0 24 24">
+  <path d="M7 7h10v10" />
+  <path d="M7 17 17 7" />
+</symbol>
+
+<symbol id="i-arrow-down" viewBox="0 0 24 24">
+  <path d="M12 5v14" />
+  <path d="m19 12-7 7-7-7" />
+</symbol>
+
+<symbol id="i-check" viewBox="0 0 24 24">
+  <path d="M20 6 9 17l-5-5" />
+</symbol>
+
+<symbol id="i-x" viewBox="0 0 24 24">
+  <path d="M18 6 6 18" />
+  <path d="m6 6 12 12" />
+</symbol>
+
+<symbol id="i-menu" viewBox="0 0 24 24">
+  <path d="M4 6h16M4 12h16M4 18h16" />
+</symbol>
+
+<symbol id="i-map-pin" viewBox="0 0 24 24">
+  <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+  <circle cx="12" cy="10" r="3" />
+</symbol>
+
+<symbol id="i-shield" viewBox="0 0 24 24">
+  <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" />
+</symbol>
+
+<symbol id="i-users" viewBox="0 0 24 24">
+  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+</symbol>
+
+<symbol id="i-headphones" viewBox="0 0 24 24">
+  <path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3" />
+</symbol>
+
+<symbol id="i-gamepad" viewBox="0 0 24 24">
+  <path d="M6 11h4M8 9v4M15 12h.01M18 10h.01" />
+  <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258A4 4 0 0 0 17.32 5z" />
+</symbol>
+
+<symbol id="i-loader" viewBox="0 0 24 24">
+  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+</symbol>
+
+<symbol id="i-external" viewBox="0 0 24 24">
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</symbol>
+
+<symbol id="i-discord" viewBox="0 0 24 24">
+  <path d="M19.7 5.2a18 18 0 0 0-4.4-1.4l-.6 1.2a16 16 0 0 0-5.4 0l-.6-1.2a18 18 0 0 0-4.4 1.4C1.5 9.4.8 13.5 1.2 17.6a18 18 0 0 0 5.4 2.7l1.1-1.8-1.7-.8.4-.3a13 13 0 0 0 11.2 0l.4.3-1.7.8 1.1 1.8a18 18 0 0 0 5.4-2.7c.5-4.8-.8-8.8-3.1-12.4ZM8.3 14.9c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm7.4 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z" />
+</symbol>
+
+  </svg>
+
+<a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <!-- ===================== EN-TÊTE ===================== -->
+
+  <header class="site-header">
+
+
+<div class="site-container flex items-center justify-between gap-6">
+
+  <a class="brand" href="#accueil" aria-label="État de Leonida — Accueil">
+    <img src="images/logo-nav.png" width="42" height="42" alt="" />
+    <span>
+      <small>ÉTAT DE</small>
+      <strong>LEONIDA<span class="brand-period">.</span></strong>
+    </span>
+  </a>
+
+  <nav class="desktop-nav flex items-center gap-9" aria-label="Navigation principale">
+    <a href="#accueil" class="nav-active">Accueil</a>
+    <a href="#apropos">À propos</a>
+  </nav>
+
+  <!-- Actions desktop -->
+  <div class="header-actions">
+
+    <a
+      data-invite
+      class="join-button header-join"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg class="icon-discord" aria-hidden="true">
+        <use href="#i-discord" />
+      </svg>
+
+      <span>Rejoindre le Discord</span>
+
+      <svg
+        class="icon button-arrow"
+        width="18"
+        height="18"
+        aria-hidden="true"
+      >
+        <use href="#i-arrow-up-right" />
+      </svg>
+    </a>
+
+    <button
+      type="button"
+      id="appeal-open-header"
+      class="appeal-header-button"
+      aria-label="Faire appel d’un bannissement"
+      title="Faire appel d’un bannissement"
+    >
+      <svg class="icon" width="14" height="14" aria-hidden="true">
+        <use href="#i-shield" />
+      </svg>
+
+      <span>Vous avez été banni ?</span>
+    </button>
+
   </div>
-  <div class="emblem" role="img" aria-label="Logo de l'État de Léonida"><div class="rays"></div><div class="sky"><div class="in"></div></div><img class="fg" src="assets/logo-emblem.png" alt=""><div class="ring"></div></div>
-</header>
 
-<section id="apropos">
-  <div class="panel">
-    <h2>À propos</h2>
-    <p>Nous sommes une communauté de jeu et de recherche de groupe centrée sur Grand Theft Auto Online et sur GTA VI. Notre objectif principal est de créer et de maintenir une communauté saine où les joueurs peuvent se réunir pour jouer, discuter et passer du temps régulièrement avec d'autres membres et notre équipe.</p>
-    <p>Bien que nous ne puissions pas prédire l'avenir, nous avons certainement l'intention de nous améliorer continuellement afin de vous offrir la meilleure expérience possible. Nous espérons sincèrement pouvoir le faire avec votre soutien et votre participation.</p>
-  </div>
-</section>
+  <!-- Bouton menu mobile -->
+  <button
+    class="mobile-menu-button"
+    id="menu-button"
+    type="button"
+    aria-label="Ouvrir le menu"
+    aria-expanded="false"
+    aria-controls="mobile-nav"
+  >
+    <span id="icon-menu">
+      <svg class="icon" width="24" height="24" aria-hidden="true">
+        <use href="#i-menu" />
+      </svg>
+    </span>
 
-<footer>
-  <p>Serveur communautaire non officiel, sans lien avec Rockstar Games ni Take-Two.</p>
-  <p>Illustration de fond : GTAGFX</p>
-</footer>
+    <span id="icon-close" hidden>
+      <svg class="icon" width="24" height="24" aria-hidden="true">
+        <use href="#i-x" />
+      </svg>
+    </span>
+  </button>
 
-<div class="modal" id="modal" hidden>
-  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <button class="modal-x" id="modal-close" type="button" aria-label="Fermer">&times;</button>
-    <div id="modal-body"></div>
-  </div>
 </div>
 
-<script src="script.js"></script>
+<!-- Menu mobile -->
+<nav
+  class="mobile-nav"
+  id="mobile-nav"
+  aria-label="Navigation mobile"
+  hidden
+>
+  <a href="#accueil">Accueil</a>
+  <a href="#apropos">À propos</a>
+</nav>
+
+
+  </header>
+
+  <main id="contenu">
+
+
+<!-- ===================== ACCUEIL (hero) ===================== -->
+
+<div class="hero-shell" id="accueil">
+
+  <div class="hero-backdrop" aria-hidden="true"></div>
+
+  <div>
+
+    <section class="hero site-container" aria-labelledby="hero-title">
+
+      <div class="hero-copy">
+
+        <div class="hero-eyebrow">
+          <span class="status-dot"></span>
+          GTA VI &amp; GTA ONLINE
+          <span class="eyebrow-separator"></span>
+          COMMUNAUTÉ FRANCOPHONE
+        </div>
+
+        <h1 id="hero-title">
+          BIENVENUE<br />
+          EN <span>LEONIDA.</span>
+        </h1>
+
+        <div class="hero-tagline">
+          Les belles histoires commencent ici.
+        </div>
+
+        <p class="hero-description">
+          Le décor change. L’esprit reste.<br />
+          Trouve ton crew, partage tes aventures et vis<br class="desktop-break" />
+          la prochaine génération de GTA avec nous.
+        </p>
+
+        <div class="hero-actions flex flex-wrap items-center gap-7">
+
+          <a
+            data-invite
+            class="join-button"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg class="icon-discord" aria-hidden="true">
+              <use href="#i-discord" />
+            </svg>
+
+            <span>Rejoindre la communauté</span>
+
+            <svg
+              class="icon button-arrow"
+              width="18"
+              height="18"
+              aria-hidden="true"
+            >
+              <use href="#i-arrow-up-right" />
+            </svg>
+          </a>
+
+          <a class="discover-link" href="#apropos">
+            Explorer Leonida
+            <svg class="icon" width="16" height="16" aria-hidden="true">
+              <use href="#i-arrow-down" />
+            </svg>
+          </a>
+
+        </div>
+
+        <div class="hero-social flex items-center gap-3">
+
+          <div class="crew-icons flex" aria-hidden="true">
+
+            <span>
+              <svg class="icon" width="17" height="17" aria-hidden="true">
+                <use href="#i-gamepad" />
+              </svg>
+            </span>
+
+            <span>
+              <svg class="icon" width="17" height="17" aria-hidden="true">
+                <use href="#i-headphones" />
+              </svg>
+            </span>
+
+            <span>
+              <svg class="icon" width="17" height="17" aria-hidden="true">
+                <use href="#i-users" />
+              </svg>
+            </span>
+
+          </div>
+
+          <p>
+            Des joueurs. Des rencontres.
+            <strong>Ton prochain crew.</strong>
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- Médaille animée -->
+      <div class="logo-scene" id="logo-scene">
+
+        <span class="scene-cross scene-cross-top" aria-hidden="true">+</span>
+        <span class="scene-cross scene-cross-bottom" aria-hidden="true">+</span>
+
+        <div class="logo-perspective" id="logo-tilt">
+
+          <div
+            class="sun-emblem"
+            role="img"
+            aria-label="Emblème de l’État de Leonida"
+          >
+            <div class="sun-rays"></div>
+            <div class="sun-sky">
+              <div class="sun-in"></div>
+            </div>
+            <img class="sun-fg" src="images/logo-emblem.png" alt="" />
+            <div class="sun-ring"></div>
+          </div>
+
+        </div>
+
+        <span class="logo-script">
+          Greetings from paradise.
+        </span>
+
+        <div class="logo-shadow" aria-hidden="true"></div>
+
+      </div>
+
+      <div class="hero-bottom flex items-center justify-between">
+
+        <span>
+          <svg class="icon" width="13" height="13" aria-hidden="true">
+            <use href="#i-map-pin" />
+          </svg>
+          LEONIDA, LÀ OÙ TOUT COMMENCE.
+        </span>
+
+        <a href="#apropos">
+          DÉFILE POUR DÉCOUVRIR
+          <svg class="icon" width="15" height="15" aria-hidden="true">
+            <use href="#i-arrow-down" />
+          </svg>
+        </a>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+<!-- ===================== BANDEAU QUI DÉFILE ===================== -->
+
+<div
+  class="ticker"
+  aria-label="GTA VI — Rencontre ton crew — GTA Online — Bienvenue en Leonida"
+>
+
+  <div class="ticker-track" id="ticker-track" aria-hidden="true">
+
+    <!-- Ce groupe est recopié 4 fois par script.js -->
+    <div class="ticker-group">
+      <span>GTA VI</span>
+      <i>✦</i>
+      <span>RENCONTRE TON CREW</span>
+      <i>✦</i>
+      <span>GTA ONLINE</span>
+      <i>✦</i>
+      <span>BIENVENUE EN LEONIDA</span>
+      <i>✦</i>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- ===================== À PROPOS ===================== -->
+
+<section
+  class="about-section section-pad"
+  id="apropos"
+  aria-labelledby="about-title"
+>
+
+  <div class="site-container about-grid">
+
+    <div class="about-art" aria-hidden="true">
+
+      <div class="about-art-image"></div>
+
+      <div class="postcard-label">
+        <svg class="icon" width="15" height="15" aria-hidden="true">
+          <use href="#i-map-pin" />
+        </svg>
+        LEONIDA, USA
+      </div>
+
+      <img
+        class="postcard-script"
+        src="images/welcome-caption.png"
+        alt=""
+      />
+
+      <span class="postcard-corner">L.</span>
+
+    </div>
+
+    <div class="about-copy">
+
+      <p class="section-eyebrow">
+        BIENVENUE CHEZ TOI
+      </p>
+
+      <h2 id="about-title">
+        UN SERVEUR.<br />
+        DES GENS.<br />
+        <span>DES HISTOIRES.</span>
+      </h2>
+
+      <p>
+        Nous sommes une communauté de jeu et de recherche de groupe
+        centrée sur <strong>Grand Theft Auto Online et GTA VI.</strong>
+        Notre ambition : un endroit où tu peux jouer, discuter et
+        retrouver d’autres passionnés, tout simplement.
+      </p>
+
+      <p>
+        Une communauté saine se construit ensemble. Avec tes idées,
+        ton soutien et ta participation, on continue d’améliorer
+        l’expérience, jour après jour.
+      </p>
+
+      <div class="about-values flex flex-wrap gap-x-6 gap-y-3">
+
+        <span>
+          <svg class="icon" width="15" height="15" aria-hidden="true">
+            <use href="#i-check" />
+          </svg>
+          Une communauté saine
+        </span>
+
+        <span>
+          <svg class="icon" width="15" height="15" aria-hidden="true">
+            <use href="#i-check" />
+          </svg>
+          Une équipe à l’écoute
+        </span>
+
+      </div>
+
+      <a
+        data-invite
+        class="text-link"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Fais partie de l’histoire
+        <svg class="icon" width="17" height="17" aria-hidden="true">
+          <use href="#i-arrow-up-right" />
+        </svg>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===================== INVITATION FINALE ===================== -->
+
+<section
+  class="join-section"
+  id="rejoindre"
+  aria-labelledby="join-title"
+>
+
+  <div class="site-container join-section-content">
+
+    <span class="section-eyebrow">
+      LA PROCHAINE AVENTURE N’ATTEND QUE TOI
+    </span>
+
+    <h2 id="join-title">
+      ON SE RETROUVE<br />
+      <span>DE L’AUTRE CÔTÉ ?</span>
+    </h2>
+
+    <p>
+      Le soleil se couche sur la baie. Ton histoire, elle, commence.
+    </p>
+
+    <a
+      data-invite
+      class="join-button"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <svg class="icon-discord" aria-hidden="true">
+        <use href="#i-discord" />
+      </svg>
+
+      <span>Rejoindre la communauté</span>
+
+      <svg
+        class="icon button-arrow"
+        width="18"
+        height="18"
+        aria-hidden="true"
+      >
+        <use href="#i-arrow-up-right" />
+      </svg>
+    </a>
+
+    <span class="join-note">
+      <svg class="icon-discord" aria-hidden="true">
+        <use href="#i-discord" />
+      </svg>
+      Gratuit. Sans candidature. Juste toi et ton crew.
+    </span>
+
+  </div>
+
+  <span class="join-bg-word" aria-hidden="true">
+    LEONIDA
+  </span>
+
+</section>
+
+
+  </main>
+
+  <!-- ===================== PIED DE PAGE ===================== -->
+
+  <footer class="site-footer">
+
+
+<div class="site-container">
+
+  <div class="footer-top">
+
+    <div class="footer-brand">
+
+      <a
+        class="brand brand-footer"
+        href="#accueil"
+        aria-label="État de Leonida — Accueil"
+      >
+        <img src="images/logo-nav.png" width="42" height="42" alt="" />
+
+        <span>
+          <small>ÉTAT DE</small>
+          <strong>
+            LEONIDA<span class="brand-period">.</span>
+          </strong>
+        </span>
+      </a>
+
+      <p>Le décor change. L’esprit reste.</p>
+      <p class="footer-credit">Fond tropical : GTAGFX.</p>
+
+    </div>
+
+    <div class="footer-links">
+
+      <span>EXPLORER</span>
+
+      <a href="#apropos">
+        À propos de nous
+      </a>
+
+      <a data-invite target="_blank" rel="noopener noreferrer">
+        Notre Discord
+        <svg class="icon" width="13" height="13" aria-hidden="true">
+          <use href="#i-arrow-up-right" />
+        </svg>
+      </a>
+
+    </div>
+
+    <div class="footer-support">
+
+      <span>ASSISTANCE</span>
+
+      <p>Un souci pour accéder au serveur ?</p>
+
+      <button
+        type="button"
+        id="appeal-open"
+        class="appeal-button"
+      >
+        <svg class="icon" width="16" height="16" aria-hidden="true">
+          <use href="#i-shield" />
+        </svg>
+
+        Faire appel d’un bannissement
+
+        <svg class="icon" width="14" height="14" aria-hidden="true">
+          <use href="#i-arrow-up-right" />
+        </svg>
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <p>
+      © <span id="year">2026</span>
+      État de Leonida. Tous droits réservés.
+    </p>
+
+    <p>
+      Communauté non officielle. Sans lien avec Rockstar Games ni Take-Two.
+    </p>
+
+    <a
+      href="#accueil"
+      aria-label="Retour en haut de la page"
+    >
+      <svg class="icon" width="18" height="18" aria-hidden="true">
+        <use href="#i-arrow-up-right" />
+      </svg>
+    </a>
+
+  </div>
+
+</div>
+
+
+  </footer>
+
+  <!-- ===================== FENÊTRE "FAIRE APPEL" ===================== -->
+
+  <dialog
+    class="appeal-dialog"
+    id="appeal"
+    aria-labelledby="appeal-title"
+    aria-describedby="appeal-text"
+  >
+
+
+<button
+  class="dialog-close"
+  id="appeal-x"
+  type="button"
+  aria-label="Fermer la fenêtre"
+>
+  <svg class="icon" width="20" height="20" aria-hidden="true">
+    <use href="#i-x" />
+  </svg>
+</button>
+
+<span
+  class="dialog-icon"
+  id="appeal-icon"
+  aria-hidden="true"
+></span>
+
+<p class="section-eyebrow">
+  ASSISTANCE LEONIDA
+</p>
+
+<h2 id="appeal-title" aria-live="polite"></h2>
+
+<div
+  id="appeal-text"
+  class="dialog-description"
+  aria-live="polite"
+></div>
+
+<a
+  class="join-button dialog-primary"
+  id="appeal-main"
+></a>
+
+<p class="dialog-note" id="appeal-note">
+  Connexion sécurisée via Discord. Aucun mot de passe demandé.
+</p>
+
+<button
+  type="button"
+  class="dialog-secondary"
+  id="appeal-close"
+></button>
+
+  </dialog>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
